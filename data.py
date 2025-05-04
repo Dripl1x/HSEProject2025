@@ -12,7 +12,7 @@ class AudioDataset(torch.utils.data.Dataset):
         self.data_path = data_path
         self.transforms = transforms
     def __getitem__(self, idx):
-        file_path = self.table.loc[idx, 'file'] # TODO починить
+        file_path = self.table.loc[idx, 'data_table.csv'] # TODO исправить data_table
         if isinstance(file_path, str):
             path = os.path.join(self.data_path, file_path)
             audio, _ = torchaudio.load(path, channels_first=True)
@@ -22,7 +22,7 @@ class AudioDataset(torch.utils.data.Dataset):
         else:
             return None
     def __length__(self):
-        return len(self.table) # TODO починить
+        return len(self.table) # TODO исправить data_table
 
     def get_dataloader(config, dataset_type, transforms):
         dataset = AudioDataset(
